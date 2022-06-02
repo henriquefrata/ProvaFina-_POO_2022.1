@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "espm.cotacao")
+@Table(name = "cotacao", schema = "espm")
 public class CotacaoModel {
 
     @Id
