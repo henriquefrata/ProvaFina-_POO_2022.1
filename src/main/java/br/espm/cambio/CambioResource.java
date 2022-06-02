@@ -52,7 +52,7 @@ public class CambioResource {
     @Autowired
     private CotacaoService cotacaoService;
 
-    @GetMapping("/cotacao/{simbolo}")
+    @GetMapping("/cotacao/{simbolo:[A-Z]{3,}}")
     public Cotacao findCotacaoBySimbolo(@PathVariable String simbolo) {
         return cotacaoService.findCotacaoBySimbolo(simbolo);
     }
