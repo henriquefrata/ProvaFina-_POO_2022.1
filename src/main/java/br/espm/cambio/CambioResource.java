@@ -52,14 +52,7 @@ public class CambioResource {
     //Cotação
 
     @Autowired
-    private CotacaoService cotacaoService;
-
-    /*
-    @GetMapping("/cotacao/{simbolo:[A-Z]{3,}}")
-    public Cotacao findCotacaoBySimbolo(@PathVariable String simbolo) {
-        return cotacaoService.findCotacaoBySimbolo(simbolo);
-    }
-    */
+    private CotacaoService cotacaoService;    
 
     @RequestMapping(path = "/cotacao/{simbolo}/{ano}/{mes}/{dia}", method = RequestMethod.POST)
     public void save(@RequestBody Cotacao cotacao, @PathVariable String simbolo, @PathVariable String ano, @PathVariable String mes, @PathVariable String dia) {
@@ -70,6 +63,13 @@ public class CambioResource {
         cotacao.setId(moeda);
         cotacaoService.create(cotacao);
 
+    }
+
+    @GetMapping("/cotacao/{simbolo}")
+    public List<Cotacao> findCotacaoBySimbolo(@PathVariable String simbolo) {
+        
+        UUID id = moedaService.findBySimboloId(simbolo); 
+        return cotacaoService.listAll(id);
     }
 
 

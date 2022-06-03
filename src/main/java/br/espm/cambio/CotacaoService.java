@@ -17,7 +17,7 @@ public class CotacaoService {
     @Autowired
     private CotacaoRepository cotacaoRepository;
     
-    public List<Cotacao> listaAll() {
+    public List<Cotacao> listAll(UUID id) {
          return StreamSupport
             //transforme de iteravel para lista
             .stream(cotacaoRepository.findAll().spliterator(), false)

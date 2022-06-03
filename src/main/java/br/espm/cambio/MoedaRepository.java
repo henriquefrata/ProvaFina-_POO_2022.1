@@ -1,6 +1,7 @@
 package br.espm.cambio;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,5 +17,8 @@ public interface MoedaRepository extends CrudRepository <MoedaModel, String> {
 
     @Query("SELECT m from MoedaModel m WHERE UPPER(m.txSimbolo) = UPPER(:simbolo)")
     Optional<MoedaModel> findBySimbolo(@Param("simbolo") String simbolo);
+
+    @Query ("Select idMoeda from MoedaModel WHERE UPPER(txSimbolo) = UPPER(:simbolo)")
+    Optional<UUID> findBySimboloId (@Param ("simbolo") String simbolo);
 
 }

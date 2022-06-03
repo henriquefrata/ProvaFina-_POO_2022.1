@@ -37,6 +37,10 @@ public class MoedaService {
             .orElse(null);
     }
 
+    public UUID findBySimboloId(String simbolo){
+        return  moedaRepository.findBySimboloId(simbolo).orElse(null);
+      }
+
     public Moeda findBy(UUID id) {
         return moedaRepository.findById(id.toString())
                     .map(MoedaModel::to)
