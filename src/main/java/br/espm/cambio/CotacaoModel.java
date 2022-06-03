@@ -1,6 +1,7 @@
 package br.espm.cambio;
-import java.util.UUID;
 
+import java.time.LocalDate;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,10 +19,10 @@ public class CotacaoModel {
     private String idMoeda;
 
     @Column(name = "dt_data")
-    private String dtData;
+    private LocalDate data;
 
     @Column(name = "vr_valor")
-    private double vrValor;
+    private double valor;
 
     public CotacaoModel() {
 
@@ -30,16 +31,16 @@ public class CotacaoModel {
     public CotacaoModel(Cotacao cotacao) {
         this.idCotacao = cotacao.getIdc().toString();
         this.idMoeda = cotacao.getId().toString();
-        this.dtData = cotacao.getData();
-        this.vrValor = cotacao.getValor();
+        this.data = cotacao.getData();
+        this.valor = cotacao.getValor();
     }
 
     public Cotacao to() {
         Cotacao cotacao = new Cotacao();
         cotacao.setIdc(UUID.fromString(this.idCotacao));
         cotacao.setId(UUID.fromString(this.idMoeda));
-        cotacao.setData(this.dtData);
-        cotacao.setValor(this.vrValor);
+        cotacao.setData(this.data);
+        cotacao.setValor(this.valor);
         return cotacao;
     }
     

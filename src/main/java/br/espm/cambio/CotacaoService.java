@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class CotacaoService {
 
     @Autowired
-    CotacaoRepository cotacaoRepository;
+    private CotacaoRepository cotacaoRepository;
     
     public List<Cotacao> listaAll() {
          return StreamSupport
@@ -27,15 +27,8 @@ public class CotacaoService {
             .collect(Collectors.toList());
     }
 
-    public Cotacao create(Cotacao vo) {
-        vo.setId(UUID.randomUUID());
-        return cotacaoRepository.save(new CotacaoModel(vo)).to();
+    public Cotacao create(Cotacao cotacao) {
+        cotacao.setIdc(UUID.randomUUID());
+        return cotacaoRepository.save(new CotacaoModel(cotacao)).to();
     }
-
-    public Cotacao findCotacaoBySimbolo (String simbolo) {
-        return cotacaoRepository.findBySimbolo(simbolo)
-            .map(CotacaoModel::to)
-            .orElse(null);
-    }
-    
 }

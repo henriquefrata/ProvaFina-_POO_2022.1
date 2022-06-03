@@ -1,6 +1,6 @@
 package br.espm.cambio;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
 public class CambioResource {
 
-    private List<Moeda> moedas = new ArrayList<>();
+    
 
     //Moeda
 
@@ -52,9 +54,22 @@ public class CambioResource {
     @Autowired
     private CotacaoService cotacaoService;
 
+    /*
     @GetMapping("/cotacao/{simbolo:[A-Z]{3,}}")
     public Cotacao findCotacaoBySimbolo(@PathVariable String simbolo) {
         return cotacaoService.findCotacaoBySimbolo(simbolo);
+    }
+    */
+
+    @RequestMapping(path = "/cotacao/{simbolo}/{ano}/{mes}/{dia}", method = RequestMethod.POST)
+    public void save(@RequestBody Cotacao cotacao, @PathVariable String simbolo, @PathVariable String ano, @PathVariable String mes, @PathVariable String dia) {
+
+        LocalDate dt = LocalDate.parse(ano + "-" + mes + "-" + dia);
+        cotacao.setData(dt);
+        UUID moeda = moedaService.findMoedaBySimbolo(simbolo).getId();
+        cotacao.setId(moeda);
+        cotacaoService.create(cotacao);
+
     }
 
 

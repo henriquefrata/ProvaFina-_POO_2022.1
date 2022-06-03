@@ -1,20 +1,20 @@
 package br.espm.cambio;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class Cotacao {
 
     private UUID idc;
     private UUID id;
-    private String data;
+    private LocalDate data;
     private double valor;
 
     public Cotacao() {
 
     }
 
-    public Cotacao( String data, double valor) {
-        this.data = data;
+    public Cotacao(double valor) {
         this.valor = valor;
     }
 
@@ -34,11 +34,11 @@ public class Cotacao {
         this.id = id;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
