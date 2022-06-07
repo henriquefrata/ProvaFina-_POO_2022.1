@@ -46,5 +46,9 @@ public class MoedaService {
                     .map(MoedaModel::to)
                     .orElse(null);
     }
+
+    public void delete(String id){
+        moedaRepository.deleteById(id);
+    }
     
 }
